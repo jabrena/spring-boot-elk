@@ -1,0 +1,7 @@
+{
+  "persistent": {
+    "cluster.routing.allocation.disk.watermark.low": "90%",
+    "cluster.routing.allocation.disk.watermark.high": "95%",
+    "cluster.routing.allocation.disk.watermark.flood_stage": "97%"
+  }
+}
