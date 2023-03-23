@@ -1,8 +1,12 @@
 # Trouble shooting
 
-https://stackoverflow.com/questions/50609417/elasticsearch-error-cluster-block-exception-forbidden-12-index-read-only-all
+- https://stackoverflow.com/questions/50609417/elasticsearch-error-cluster-block-exception-forbidden-12-index-read-only-all
+- https://www.elastic.co/guide/en/elasticsearch/reference/master/fix-watermark-errors.html
 
 ```
+
+curl -X GET http://localhost:9200/_cluster/settings?pretty
+
 {
   "persistent": {
     "cluster.routing.allocation.disk.watermark.low": "90%",
