@@ -11,7 +11,7 @@ services:
       - "9300:9300"
     environment:
       discovery.type: single-node
-      xpack.security.enabled: false
+      xpack.security.enabled: null
       ES_JAVA_OPTS: "-Xms512m -Xmx512m"
     healthcheck:
       test: "curl -f http://localhost:9200 || exit 1"
@@ -52,3 +52,10 @@ services:
     depends_on:
       - elasticsearch
       - logstash
+
+  demo-log-api:
+    image: docker.io/library/spring-boot-elk:0.1.0-SNAPSHOT
+    ports:
+      - 8080:8080
+    depends_on:
+      - filebeat
