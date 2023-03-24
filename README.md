@@ -7,11 +7,14 @@ docker-compose stop
 
 ./mvnw clean spring-boot:build-image
 
-docker build -t jab/demo .
+docker build -t docker.io/library/spring-boot-elk:0.1.0-SNAPSHOT .
 
 docker run --rm --name demo-log-api -p 8080:8080 \
   --network=spring-boot-elk_default \
   docker.io/library/spring-boot-elk:0.1.0-SNAPSHOT
+  
+curl -X GET http://localhost:8080/api/v1/message
+
 ```
 
 - **Kibana**
