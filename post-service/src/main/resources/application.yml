@@ -1,0 +1,9 @@
+server:
+  port: ${PORT:8001}
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"
+
+comment-service:
+  base-url: http://localhost:8002
