@@ -55,9 +55,9 @@ In the root folder of our project, where the `docker-compose.yml` resides, spin 
 
     - Perform a `GET` request to `http://localhost:8001/posts/1` to generate some log data. Wait a few seconds and then click the _Refresh_ button. You will be able to see logs from the requests. The logs will contain tracing details, such as _trace.trace_id_ and _trace.span id_.
 
-    - In the left-hand side, there's a list of fields available. Hover over the list of fields and an _Add_ button will be shown for each field. Add a few fields such as `app`, `ts`, `logger`, `level`, `stack`, `msg`, `trace.trace_id` and `trace.span_id`.
+    - In the left-hand side, there's a list of fields available. Hover over the list of fields and an _Add_ button will be shown for each field. Add a few fields such as `app`, `logger`, `level`, `stack`, `msg`, `trace`, `span` and `parent`.
 
-    - Now let's see how to trace a request. Pick a trace id from the logs and, in the filter box, input `trace.trace_id: "<value>"` where `<value>` is the trace id you want to use as filter criteria. Then click the _Update_ button and you will able to see logs that match that trace id.
+    - Now let's see how to trace a request. Pick a trace id from the logs and, in the filter box, input `trace: "<value>"` where `<value>` is the trace id you want to use as filter criteria. Then click the _Update_ button and you will able to see logs that match that trace id.
  
 - To stop the containers, use `docker-compose down`.
 
