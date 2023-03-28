@@ -21,7 +21,7 @@ public class CommentController {
         this.commentService = commentService;
     }
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Comment>> getCommentsForPost(@RequestParam Long postId) {
+    public ResponseEntity<List<Comment>> getCommentsForPost(@RequestParam("postId") Long postId) {
         List<Comment> comments = commentService.getCommentsForPost(postId);
         return ResponseEntity.ok(comments);
     }

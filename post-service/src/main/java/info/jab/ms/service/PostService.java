@@ -11,4 +11,6 @@ public interface PostService {
     List<Post> getPosts();
 
     Optional<PostWithComments> getPost(Long id);
+
+    Optional<PostWithComments> getPostWebClient(Long id);
 }
