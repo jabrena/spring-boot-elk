@@ -3,7 +3,6 @@ package info.jab.ms.controller;
 import info.jab.ms.domain.Post;
 import info.jab.ms.domain.PostWithComments;
 import info.jab.ms.service.PostService;
-import info.jab.ms.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/posts")
@@ -30,9 +30,22 @@ public class PostController {
         return ResponseEntity.ok(posts);
     }
 
-    @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<PostWithComments> getPost(@PathVariable Long id) {
-        PostWithComments postWithComments = postService.getPost(id).orElseThrow(ResourceNotFoundException::new);
-        return ResponseEntity.ok(postWithComments);
+    @GetMapping(path = "/resttemplate/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<PostWithComments> getPostRestTemplate(@PathVariable Long id) {
+        Optional<PostWithComments> optionalPostWithComments = postService.getPost(id);
+        if (!optionalPostWithComments.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(optionalPostWithComments.get());
     }
+
+    @GetMapping(path = "/webclient/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<PostWithComments> getPostWebClient(@PathVariable Long id) {
+        Optional<PostWithComments> optionalPostWithComments = postService.getPostWebClient(id);
+        if (!optionalPostWithComments.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(optionalPostWithComments.get());
+    }
+
 }

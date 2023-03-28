@@ -6,14 +6,14 @@
     <springProfile name="docker">
         <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
             <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+                <charset>utf8</charset>
                 <providers>
                     <pattern>
                         <pattern>
                             {
                             "service": "${springAppName:-}",
                             "trace": "%X{traceId:-}",
-                            "span": "%X{spanId:-}",
-                            "pid": "${PID:-}"
+                            "span": "%X{spanId:-}"
                             }
                         </pattern>
                     </pattern>

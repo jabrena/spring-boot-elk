@@ -1,3 +1,7 @@
+spring:
+  application:
+    name: comment-service
+
 server:
   port: ${PORT:8002}
 
