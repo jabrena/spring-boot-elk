@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <contextName>comment-service</contextName>
+    <springProfile name="docker">
+        <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+                <providers>
+                    <pattern>
+                        <pattern>
+                            {
+                            "trace": "%X{traceId:-}",
+                            "span": "%X{spanId:-}",
+                            "pid": "${PID:-}"
+                            }
+                        </pattern>
+                    </pattern>
+                    <contextName>
+                        <fieldName>service</fieldName>
+                    </contextName>
+                    <loggerName>
+                        <fieldName>logger</fieldName>
+                    </loggerName>
+                    <logLevel>
+                        <fieldName>severity</fieldName>
+                    </logLevel>
+                    <mdc/>
+                    <arguments>
+                        <includeNonStructuredArguments>false</includeNonStructuredArguments>
+                    </arguments>
+                    <stackTrace>
+                        <fieldName>stack</fieldName>
+                    </stackTrace>
+                    <message/>
+                </providers>
+            </encoder>
+        </appender>
+    </springProfile>
+    <springProfile name="!docker">
+        <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    </springProfile>
+    <logger name="info.jab.ms" level="DEBUG" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>

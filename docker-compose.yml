@@ -53,9 +53,18 @@ services:
       - elasticsearch
       - logstash
 
-  demo-log-api:
-    image: docker.io/library/spring-boot-elk:0.1.0-SNAPSHOT
+
+  comment-service:
+    image: jab/comment-service:latest
     ports:
-      - 8080:8080
+      - "8002:8002"
     depends_on:
       - filebeat
+
+  post-service:
+    image: jab/post-service:latest
+    ports:
+      - "8001:8001"
+    depends_on:
+      - filebeat
+      - comment-service
