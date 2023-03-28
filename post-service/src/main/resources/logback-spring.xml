@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <contextName>post-service</contextName>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <springProperty scope="context" name="springAppName" source="spring.application.name"/>
+
     <springProfile name="docker">
         <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
             <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
@@ -8,15 +10,13 @@
                     <pattern>
                         <pattern>
                             {
+                            "service": "${springAppName:-}",
                             "trace": "%X{traceId:-}",
                             "span": "%X{spanId:-}",
                             "pid": "${PID:-}"
                             }
                         </pattern>
                     </pattern>
-                    <contextName>
-                        <fieldName>service</fieldName>
-                    </contextName>
                     <loggerName>
                         <fieldName>logger</fieldName>
                     </loggerName>
@@ -36,8 +36,24 @@
         </appender>
     </springProfile>
     <springProfile name="!docker">
-        <include resource="org/springframework/boot/logging/logback/base.xml"/>
+        <!-- You can override this to have a custom pattern -->
+        <property name="CONSOLE_LOG_PATTERN"
+                  value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+
+        <!-- Appender to log to console -->
+        <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+            <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+                <!-- Minimum logging level to be presented in the console logs-->
+                <level>DEBUG</level>
+            </filter>
+            <encoder>
+                <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+                <charset>utf8</charset>
+            </encoder>
+        </appender>
+
     </springProfile>
+
     <logger name="info.jab.ms" level="DEBUG" additivity="false">
         <appender-ref ref="CONSOLE"/>
     </logger>
