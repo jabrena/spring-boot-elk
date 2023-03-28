@@ -10,20 +10,18 @@
                             {
                             "trace": "%X{traceId:-}",
                             "span": "%X{spanId:-}",
-                            "parent": "%X{parentId:-}",
-                            "exportable": "%X{sampled:-}",
                             "pid": "${PID:-}"
                             }
                         </pattern>
                     </pattern>
                     <contextName>
-                        <fieldName>app</fieldName>
+                        <fieldName>service</fieldName>
                     </contextName>
                     <loggerName>
                         <fieldName>logger</fieldName>
                     </loggerName>
                     <logLevel>
-                        <fieldName>level</fieldName>
+                        <fieldName>severity</fieldName>
                     </logLevel>
                     <mdc/>
                     <arguments>
@@ -32,9 +30,7 @@
                     <stackTrace>
                         <fieldName>stack</fieldName>
                     </stackTrace>
-                    <message>
-                        <fieldName>msg</fieldName>
-                    </message>
+                    <message/>
                 </providers>
             </encoder>
         </appender>
