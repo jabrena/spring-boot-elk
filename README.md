@@ -11,15 +11,15 @@ And, for demonstration purposes, all data handled by the services is stored in m
 
 Let's see how to build the source code, spin up the Docker containers, produce some log data and then visualize the logs in Kibana.
 
-Before starting, ensure you at least Java 11, Maven 3.x and Docker set up. Then clone the [repository][repo] from GitHub:
+Before starting, ensure you at least Java 17, Maven 3.x and Docker set up. Then clone the repository from GitHub:
 
 ```bash
-git clone https://github.com/francois-poirier/spring-boot-elk-micros.git
+git clone https://github.com/jabrena/spring-boot-elk.git
 ```
 
 ### Building the applications and creating Docker images
 
-Both post and comment services use the [`dockerfile-maven`][dockerfile-maven] plugin from Spotify to make the Docker build process integrate with the Maven build process. So when we build a Spring Boot artifact, we'll also build a Docker image for it. For more details, check the `Dockerfile` and the `pox.xml` of each service.
+Both post and comment services use the docker maven plugin from Spotify to make the Docker build process integrate with the Maven build process. So when we build a Spring Boot artifact, we'll also build a Docker image for it. For more details, check the `Dockerfile` and the `pox.xml` of each service.
 
 To build the Spring Boot applications and their Docker images:
 
