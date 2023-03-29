@@ -1,4 +1,4 @@
-# Spring Boot ELK, Prometheus & Graphana
+# Spring Boot ELK, Prometheus & Grafana
 
 For this example, let's consider we are creating a blog engine and we have the following microservices:
 
