@@ -19,18 +19,11 @@ git clone https://github.com/jabrena/spring-boot-elk.git
 
 ### Building the applications and creating Docker images
 
-Both post and comment services use the docker maven plugin from Spotify to make the Docker build process integrate with the Maven build process. So when we build a Spring Boot artifact, we'll also build a Docker image for it. For more details, check the `Dockerfile` and the `pox.xml` of each service.
+Both post and comment services use the docker maven plugin from Jib to make the Docker build process integrate with the Maven build process. So when we build a Spring Boot artifact, we'll also build a Docker image for it.
 
 To build the Spring Boot applications and their Docker images:
 
-- Change to the `comment-service` folder: `cd comment-service`
-- Build the application and create a Docker image: `mvn clean install`
-- Change back to the parent folder: `cd ..`
-
-- Change to the `post-service` folder: `cd post-service`
-- Build the application and create a Docker image: `mvn clean install`
-- Change back to the parent folder: `cd ..`
-
+- in root folder execute: `mvn clean package -Pdaemon`
 - [Logging](./LOGGING.md)
 - [Monitoring](./MONITORING.md)
 
