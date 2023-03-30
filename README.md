@@ -1,4 +1,4 @@
-# Spring Boot ELK, Prometheus & Grafana
+# Spring Boot ELK
 
 For this example, let's consider we are creating a blog engine and we have the following microservices:
 
@@ -23,9 +23,8 @@ Both post and comment services use the docker maven plugin from Jib to make the 
 
 To build the Spring Boot applications and their Docker images:
 
-- in root folder execute: `mvn clean package -Pdaemon`
+- in root folder execute: `./docker-build.sh`
 - [Logging](./LOGGING.md)
-- [Monitoring](./MONITORING.md)
 
 
 

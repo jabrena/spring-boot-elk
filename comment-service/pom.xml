@@ -27,12 +27,6 @@
             <artifactId>micrometer-tracing-bridge-brave</artifactId>
         </dependency>
 
-        <!--  Metrics dependencies after Spring Boot 3 -->
-        <dependency>
-            <groupId>io.micrometer</groupId>
-            <artifactId>micrometer-registry-prometheus</artifactId>
-        </dependency>
-
         <!-- Logstash-Logback Encoder -->
         <dependency>
             <groupId>net.logstash.logback</groupId>

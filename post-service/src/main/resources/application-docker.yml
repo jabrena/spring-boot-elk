@@ -4,20 +4,5 @@ spring:
   main:
     banner-mode: "off"
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health, prometheus
-  endpoint:
-    health:
-      show-details: always
-      show-components: always
-      probes:
-        enabled: true
-  metrics:
-    tags:
-      application: ${spring.application.name}
-
 comment-service:
   base-url: http://comment-service:8002
