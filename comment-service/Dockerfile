@@ -1,4 +1,7 @@
-FROM eclipse-temurin:17-jre-alpine
-
-COPY ./target/comment-service-0.1.0-SNAPSHOT.jar comment-service.jar
-ENTRYPOINT ["java", "-jar", "comment-service.jar","-Dspring.profiles.active=docker"]
+FROM eclipse-temurin:17.0.6_10-jre-alpine
+EXPOSE 8002
+ARG OTEL_JAVA_AGENT_VERSION=1.24.0
+ADD https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/download/v${OTEL_JAVA_AGENT_VERSION}/opentelemetry-javaagent.jar /opentelemetry-javaagent.jar
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} application.jar
+ENTRYPOINT ["java", "-javaagent:/opentelemetry-javaagent.jar","-jar","/application.jar"]

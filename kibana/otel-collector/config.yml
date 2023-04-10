@@ -1,0 +1,28 @@
+receivers:
+  otlp:
+
+processors:
+  memory_limiter:
+    check_interval: 1s
+    limit_mib: 2000
+  batch:
+
+exporters:
+  elastic:
+    apm_server_url: 'http://apm-server:8200'
+  logging:
+    loglevel: DEBUG
+extensions:
+  health_check:
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      exporters: [logging,elastic]
+    metrics:
+      receivers: [otlp]
+      exporters: [logging,elastic]
+    logs:
+      receivers: [otlp]
+      exporters: [logging,elastic]

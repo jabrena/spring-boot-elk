@@ -1,4 +1,4 @@
-# Spring Boot ELK
+# Spring Boot Observability
 
 For this example, let's consider we are creating a blog engine and we have the following microservices:
 
@@ -19,12 +19,27 @@ git clone https://github.com/jabrena/spring-boot-elk.git
 
 ### Building the applications and creating Docker images
 
-Both post and comment services use the docker maven plugin from Jib to make the Docker build process integrate with the Maven build process. So when we build a Spring Boot artifact, we'll also build a Docker image for it.
+## Running and exploring this demo
 
-To build the Spring Boot applications and their Docker images:
+- run `./mvnw clean install` to build the two Spring Boot applications (`comment-service` and `post-service`)
+- create the dedicated docker network so that services can reach each other and infrastructure with `docker network create observability_poc`
+- create the dedicated docker volume so that services can reach each other and infrastructure with `docker volume create observability_poc`
 
-- in root folder execute: `./docker-build.sh`
-- [Logging](./LOGGING.md)
+## Grafana infrastructure
+
+- run `docker compose -f grafana/docker-compose.yml up -d` to start grafana in the background
+- run the services with `docker compose up --build`
+- call `http://localhost:8001/posts/resttemplate/1` or `http://localhost:8001/posts/webclient/1`
+- open `http://localhost:3000/explore` in you browser while watching for the logs of the post-service.
+- Notice the trace ids in the logs, second value into brackets. In grafana, go to the Explore View, select Tempo in the top left drop-down menu, and enter a Trace ID to see its content.
+
+## Elastic infrastructure
+
+- run `docker compose -f kibana/docker-compose.yml up -d` to start kibana in the background
+- run the services with `docker compose up --build`
+- call `http://localhost:8001/posts/resttemplate/1` or `http://localhost:8001/posts/webclient/1`
+- open `http://localhost:3000/explore` in you browser while watching for the logs of the post-service.
+
 
 
 
