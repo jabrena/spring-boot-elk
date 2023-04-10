@@ -1,8 +1,25 @@
 spring:
+  output:
+    ansi:
+      enabled: always
   application:
     name: comment-service
 
 server:
   port: ${PORT:8002}
+
+management:
+  endpoint:
+    beans:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  tracing:
+    enabled: true
+    sampling.probability: 1.0
+
+otel.exporter.otlp.traces.endpoint: http://localhost:4317
 
 logging.pattern.level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"

@@ -3,14 +3,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.0.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-
     <groupId>info.jab.ms</groupId>
     <artifactId>spring-boot-elk</artifactId>
     <version>0.1.0-SNAPSHOT</version>
@@ -21,9 +19,9 @@
         <spring-boot.version>3.0.5</spring-boot.version>
         <spring-cloud.version>2022.0.1</spring-cloud.version>
         <lombok.version>1.18.26</lombok.version>
-        <logstash-logback-encoder.version>7.3</logstash-logback-encoder.version>
         <springdoc-openapi.version>2.0.4</springdoc-openapi.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <opentelemetry-exporter.version>1.24.0</opentelemetry-exporter.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -43,18 +41,8 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
     <modules>
         <module>post-service</module>
         <module>comment-service</module>
     </modules>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 </project>
