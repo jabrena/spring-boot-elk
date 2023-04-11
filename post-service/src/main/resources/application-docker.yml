@@ -11,7 +11,7 @@ elastic.apm.service-name: ${spring.application.name}
 elastic.apm.secret-token: xxVpmQB2HMzCL9PgBHVrnxjNXXw5J7bd79DFm6sjBJR5HPXDhcF8MSb3vv4bpg44
 elastic.apm.environment: docker
 elastic.apm.application-packages: info.jab.ms
-elastic.apm.log-level: DEBUG
+elastic.apm.log-level: INFO
 
 comment-service:
   base-url: http://comment-service:8002

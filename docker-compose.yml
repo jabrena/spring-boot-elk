@@ -44,6 +44,7 @@ services:
 
   apm-server:
     image: docker.elastic.co/apm/apm-server:7.17.9
+    container_name: apm-server
     ports:
       - 8200:8200
     environment:
@@ -72,6 +73,7 @@ services:
 
   comment-service:
     image: jab/comment-service:0.1.0-SNAPSHOT
+    container_name: comment-service
     environment:
       - "SPRING_PROFILES_ACTIVE=docker"
     ports:
@@ -81,6 +83,7 @@ services:
 
   post-service:
     image: jab/post-service:0.1.0-SNAPSHOT
+    container_name: post-service
     environment:
       - "SPRING_PROFILES_ACTIVE=docker"
     ports:
