@@ -24,6 +24,7 @@
         <logstash-logback-encoder.version>7.3</logstash-logback-encoder.version>
         <springdoc-openapi.version>2.0.4</springdoc-openapi.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <elastic-apm.version>1.36.0</elastic-apm.version>
     </properties>
     <dependencyManagement>
         <dependencies>
