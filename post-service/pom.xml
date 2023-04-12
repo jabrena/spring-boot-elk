@@ -24,6 +24,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
+        <!--Elastic APM-->
+        <dependency>
+            <groupId>co.elastic.apm</groupId>
+            <artifactId>apm-agent-attach</artifactId>
+            <version>${elastic-apm.version}</version>
+        </dependency>
+
         <!--  Tracing dependencies after Spring Boot 3 -->
         <dependency>
             <groupId>io.micrometer</groupId>
