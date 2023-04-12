@@ -34,6 +34,9 @@ public class ElasticApmConfig {
     private static final String LOG_LEVEL_KEY = "log_level";
     private String logLevel;
 
+    private static final String LOG_ECS_REFORMATTING_KEY = "log_ecs_reformatting";
+    private String logEcsReformatting;
+
     @PostConstruct
     public void init() {
 
@@ -44,6 +47,7 @@ public class ElasticApmConfig {
         apmProps.put(ENVIRONMENT_KEY, environment);
         apmProps.put(APPLICATION_PACKAGES_KEY, applicationPackages);
         apmProps.put(LOG_LEVEL_KEY, logLevel);
+        apmProps.put(LOG_ECS_REFORMATTING_KEY, logEcsReformatting);
 
         ElasticApmAttacher.attach(apmProps);
     }

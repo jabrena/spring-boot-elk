@@ -12,6 +12,7 @@ elastic.apm.secret-token: xxVpmQB2HMzCL9PgBHVrnxjNXXw5J7bd79DFm6sjBJR5HPXDhcF8MS
 elastic.apm.environment: docker
 elastic.apm.application-packages: info.jab.ms
 elastic.apm.log-level: INFO
+elastic.apm.log_ecs_reformatting: override
 
 comment-service:
   base-url: http://comment-service:8002
