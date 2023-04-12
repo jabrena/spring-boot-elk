@@ -30,12 +30,13 @@
             <artifactId>micrometer-tracing-bridge-brave</artifactId>
         </dependency>
 
-        <!-- Logstash-Logback Encoder -->
+        <!-- https://mvnrepository.com/artifact/co.elastic.logging/logback-ecs-encoder -->
         <dependency>
-            <groupId>net.logstash.logback</groupId>
-            <artifactId>logstash-logback-encoder</artifactId>
-            <version>${logstash-logback-encoder.version}</version>
+            <groupId>co.elastic.logging</groupId>
+            <artifactId>logback-ecs-encoder</artifactId>
+            <version>${logback-ecs-encoder.version}</version>
         </dependency>
+
 
         <!-- Lombok -->
         <dependency>

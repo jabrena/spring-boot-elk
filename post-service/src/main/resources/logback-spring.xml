@@ -1,63 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
-    <springProperty scope="context" name="springAppName" source="spring.application.name"/>
+    <include resource="org/springframework/boot/logging/logback/file-appender.xml"/>
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="co.elastic.logging.logback.EcsEncoder">
+            <serviceName>post-service</serviceName>
+        </encoder>
+    </appender>
+    <appender name="json-file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="co.elastic.logging.logback.EcsEncoder">
+            <serviceName>post-service</serviceName>
+        </encoder>
+        <file>${LOG_FILE}.json</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FILE}.json.%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
+            <maxFileSize>${LOG_FILE_MAX_SIZE:-10MB}</maxFileSize>
+            <maxHistory>${LOG_FILE_MAX_HISTORY:-0}</maxHistory>
+        </rollingPolicy>
+    </appender>
 
-    <springProfile name="docker">
-        <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-            <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
-                <charset>utf8</charset>
-                <providers>
-                    <pattern>
-                        <pattern>
-                            {
-                            "service": "${springAppName:-}",
-                            "trace": "%X{traceId:-}",
-                            "span": "%X{spanId:-}"
-                            }
-                        </pattern>
-                    </pattern>
-                    <loggerName>
-                        <fieldName>logger</fieldName>
-                    </loggerName>
-                    <logLevel>
-                        <fieldName>severity</fieldName>
-                    </logLevel>
-                    <mdc/>
-                    <arguments>
-                        <includeNonStructuredArguments>false</includeNonStructuredArguments>
-                    </arguments>
-                    <stackTrace>
-                        <fieldName>stack</fieldName>
-                    </stackTrace>
-                    <message/>
-                </providers>
-            </encoder>
-        </appender>
-    </springProfile>
-    <springProfile name="!docker">
-        <!-- You can override this to have a custom pattern -->
-        <property name="CONSOLE_LOG_PATTERN"
-                  value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
-
-        <!-- Appender to log to console -->
-        <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-            <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-                <!-- Minimum logging level to be presented in the console logs-->
-                <level>DEBUG</level>
-            </filter>
-            <encoder>
-                <pattern>${CONSOLE_LOG_PATTERN}</pattern>
-                <charset>utf8</charset>
-            </encoder>
-        </appender>
-
-    </springProfile>
-
-    <logger name="info.jab.ms" level="DEBUG" additivity="false">
-        <appender-ref ref="CONSOLE"/>
-    </logger>
     <root level="INFO">
-        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="console"/>
+        <appender-ref ref="json-file"/>
     </root>
 </configuration>
