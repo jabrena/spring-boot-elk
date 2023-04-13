@@ -42,6 +42,22 @@ services:
     healthcheck:
       test: "curl -f http://localhost:5601 || exit 1"
 
+  apm-server:
+    image: docker.elastic.co/apm/apm-server:8.3.2
+    container_name: apm-server
+    ports:
+      - 8200:8200
+    environment:
+      - output.elasticsearch.hosts=['http://elasticsearch:9200']
+      - apm-server.host="0.0.0.0:8200"
+      - apm-server.secret_token="xxVpmQB2HMzCL9PgBHVrnxjNXXw5J7bd79DFm6sjBJR5HPXDhcF8MSb3vv4bpg44"
+      - setup.kibana.host="kibana:5601"
+      - setup.template.enabled=true
+      - logging.to_files=false
+    depends_on:
+      - elasticsearch
+      - kibana
+
   filebeat:
     build: filebeat
     container_name: filebeat

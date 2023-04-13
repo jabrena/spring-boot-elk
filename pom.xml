@@ -23,6 +23,7 @@
         <lombok.version>1.18.26</lombok.version>
         <logback-ecs-encoder.version>1.5.0</logback-ecs-encoder.version>
         <springdoc-openapi.version>2.0.4</springdoc-openapi.version>
+        <elastic-apm.version>1.36.0</elastic-apm.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencyManagement>
