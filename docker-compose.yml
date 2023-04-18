@@ -63,19 +63,21 @@ services:
     container_name: filebeat
     restart: unless-stopped
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /var/lib/docker/containers:/usr/share/dockerlogs/data:ro
+      - shared-volume:/var/log/app/
     depends_on:
       - elasticsearch
       - logstash
-
 
   comment-service:
     image: jab/comment-service:0.1.0-SNAPSHOT
     environment:
       - "SPRING_PROFILES_ACTIVE=docker"
+      - "LOG_FILE=/var/log/app/comment-service"
     ports:
       - "8002:8002"
+    volumes:
+      - shared-volume:/var/log/app/
+      - ./logback-spring.xml:/logback-spring.xml
     depends_on:
       - filebeat
 
@@ -83,8 +85,16 @@ services:
     image: jab/post-service:0.1.0-SNAPSHOT
     environment:
       - "SPRING_PROFILES_ACTIVE=docker"
+      - "LOG_FILE=/var/log/app/post-service"
     ports:
       - "8001:8001"
+    volumes:
+      - shared-volume:/var/log/app/
+      - ./logback-spring.xml:/logback-spring.xml
     depends_on:
       - filebeat
       - comment-service
+
+volumes:
+  shared-volume:
+    external: true
