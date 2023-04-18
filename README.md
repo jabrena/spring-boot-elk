@@ -17,15 +17,28 @@ Before starting, ensure you at least Java 17, Maven 3.x and Docker set up. Then 
 git clone https://github.com/jabrena/spring-boot-elk.git
 ```
 
-### Building the applications and creating Docker images
+## Building the applications and creating Docker images
 
 Both post and comment services use the docker maven plugin from Jib to make the Docker build process integrate with the Maven build process. So when we build a Spring Boot artifact, we'll also build a Docker image for it.
 
 To build the Spring Boot applications and their Docker images:
 
-- in root folder execute: `./docker-build.sh`
+in root folder execute: 
+
+```
+./docker-build.sh
+docker compose up -d
+docker stats
+
+curl http://localhost:8001/posts/resttemplate/1
+curl http://localhost:8001/posts/webclient/1
+curl http://localhost:8001/katakroker
+
+./test-apis.sh
+
+http:localhost:5601
+```
+
+## Features
+
 - [Logging](./LOGGING.md)
-
-
-
-
