@@ -23,9 +23,12 @@ Both post and comment services use the docker maven plugin from Jib to make the 
 
 To build the Spring Boot applications and their Docker images:
 
-- in root folder execute: `./docker-build.sh`
+- In the root folder of our project, execute: `./docker-cleanup.sh`
+- In the root folder of our project, execute: `./docker-build.sh`
+- In the root folder of our project, execute: `docker volume create shared-volume`
+- In the root folder of our project, where the `docker-compose.yml` resides, spin up the Docker containers running `docker-compose up -d --build`.
 - [Logging](./LOGGING.md)
 
-
+- To stop the containers, use `docker-compose down`.
 
 
