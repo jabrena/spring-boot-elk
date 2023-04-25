@@ -5,4 +5,7 @@ spring:
 server:
   port: ${PORT:8002}
 
+# Elastic APM
+elastic.apm.enabled: false
+
 logging.pattern.level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
