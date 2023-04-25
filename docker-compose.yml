@@ -58,7 +58,6 @@ services:
       - elasticsearch
       - kibana
 
-
   filebeat:
     build: filebeat
     container_name: filebeat
@@ -69,7 +68,6 @@ services:
     depends_on:
       - elasticsearch
       - logstash
-
 
   comment-service:
     image: jab/comment-service:0.1.0-SNAPSHOT
