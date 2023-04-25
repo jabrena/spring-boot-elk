@@ -26,7 +26,10 @@ To build the Spring Boot applications and their Docker images:
 in root folder execute: 
 
 ```
+./docker-cleanup.sh
 ./docker-build.sh
+docker network create shared-volume
+docker volume create shared-volume
 docker compose up -d
 docker stats
 
@@ -37,6 +40,8 @@ curl http://localhost:8001/katakroker
 ./test-apis.sh
 
 http:localhost:5601
+
+docker compose down
 ```
 
 ## Features
