@@ -37,6 +37,12 @@
             <version>${logback-ecs-encoder.version}</version>
         </dependency>
 
+        <!--Elastic APM-->
+        <dependency>
+            <groupId>co.elastic.apm</groupId>
+            <artifactId>apm-agent-attach</artifactId>
+            <version>${elastic-apm.version}</version>
+        </dependency>
 
         <!-- Lombok -->
         <dependency>
