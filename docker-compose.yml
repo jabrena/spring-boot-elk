@@ -3,7 +3,7 @@ version: "3.8"
 services:
 
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.5.3
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.7.1
     container_name: elasticsearch
     restart: unless-stopped
     ports:
@@ -17,7 +17,7 @@ services:
       test: "curl -f http://localhost:9200 || exit 1"
 
   logstash:
-    image: docker.elastic.co/logstash/logstash:8.5.3
+    image: docker.elastic.co/logstash/logstash:8.7.1
     container_name: logstash
     restart: unless-stopped
     ports:
@@ -30,7 +30,7 @@ services:
       test: "curl -f http://localhost:9600 || exit 1"
 
   kibana:
-    image: docker.elastic.co/kibana/kibana:8.5.3
+    image: docker.elastic.co/kibana/kibana:8.7.1
     container_name: kibana
     restart: unless-stopped
     ports:
@@ -41,6 +41,22 @@ services:
       - elasticsearch
     healthcheck:
       test: "curl -f http://localhost:5601 || exit 1"
+
+  apm-server:
+    image: docker.elastic.co/apm/apm-server:8.7.1
+    container_name: apm-server
+    ports:
+      - 8200:8200
+    environment:
+      - output.elasticsearch.hosts=['http://elasticsearch:9200']
+      - apm-server.host="0.0.0.0:8200"
+      - apm-server.secret_token="xxVpmQB2HMzCL9PgBHVrnxjNXXw5J7bd79DFm6sjBJR5HPXDhcF8MSb3vv4bpg44"
+      - setup.kibana.host="kibana:5601"
+      - setup.template.enabled=true
+      - logging.to_files=false
+    depends_on:
+      - elasticsearch
+      - kibana
 
   filebeat:
     build: filebeat
@@ -53,9 +69,9 @@ services:
       - elasticsearch
       - logstash
 
-
   comment-service:
     image: jab/comment-service:0.1.0-SNAPSHOT
+    container_name: comment-service
     environment:
       - "SPRING_PROFILES_ACTIVE=docker"
     ports:
@@ -65,6 +81,7 @@ services:
 
   post-service:
     image: jab/post-service:0.1.0-SNAPSHOT
+    container_name: post-service
     environment:
       - "SPRING_PROFILES_ACTIVE=docker"
     ports:

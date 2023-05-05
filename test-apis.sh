@@ -11,4 +11,5 @@ for i in {0..1000}
   curl "${api_base_url}/posts/resttemplate/2"
   curl "${api_base_url}/posts/webclient/2"
   printf "\n"
+
  done
