@@ -24,7 +24,7 @@
         <logback-ecs-encoder.version>1.5.0</logback-ecs-encoder.version>
         <springdoc-openapi.version>2.0.4</springdoc-openapi.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <elastic-apm.version>1.36.0</elastic-apm.version>
+        <elastic-apm.version>1.38.0</elastic-apm.version>
     </properties>
     <dependencyManagement>
         <dependencies>
